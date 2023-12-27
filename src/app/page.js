@@ -32,10 +32,20 @@ export default function Home() {
 				className="text-2xl text-blue-500 p-1"
 				type="text"
 				placeholder="Enter Item"
+				autoCorrect="on"
+				spellCheck={true}
 			/>
 			<button
 				className="bg-blue-500 p-3 rounded-lg hover:opacity-50 m-2"
-				onClick={handleSubmit}
+				onClick={(e) => {
+					const i = e["target"]["previousElementSibling"]["value"];
+					if (i == null || i == "") {
+						alert("Please enter a grocery item! >:(");
+						return false;
+					} else {
+						handleSubmit(e);
+					}
+				}}
 			>
 				Add
 			</button>
@@ -45,11 +55,6 @@ export default function Home() {
 						<button
 							onClick={handleClassToggle}
 							className="bg-blue-500 p-3 w-full"
-							// onClick={(i) => {
-							// 	if (i) {
-							// 		console.log(i.target.childNodes[0].textContent);
-							// 	}
-							// }}
 						>
 							{item}
 						</button>
